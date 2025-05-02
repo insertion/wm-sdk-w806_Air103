@@ -146,7 +146,7 @@ distclean:clean
 	$(RM) -r $(SDK_TOOLS)/.config.old
 
 run:all
-	@$(WM_TOOL) -c $(DL_PORT) -rs at -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls -sl str -ws 115200
+	@$(WM_TOOL) -c $(DL_PORT) -rs rts -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls -sl str -ws 115200
 
 monitor:
 	@$(WM_TOOL) -c $(DL_PORT) -sl str -ws 115200
@@ -161,7 +161,7 @@ image:all
 	@$(WM_TOOL) -c $(DL_PORT) -rs at -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img
 
 flash:all
-	@$(WM_TOOL) -c $(DL_PORT) -rs at -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
+	@$(WM_TOOL) -c $(DL_PORT) -rs rts -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
 
 erase:
 	@$(WM_TOOL) -c $(DL_PORT) -rs at -eo all

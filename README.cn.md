@@ -53,6 +53,12 @@ sudo chown -R root:root csky-elfabiv2-tools-x86_64-minilibc-20210423/
 git clone https://github.com/IOsetting/wm-sdk-w806.git
 ```
 运行menuconfig, 配置工具路径
+
+*ncurses.h头文件找不到需要安装libncurses5-dev*
+```bash
+sudo apt-get install libncurses5-dev
+```
+
 ```bash
 cd wm-sdk-w806
 make menuconfig
@@ -88,6 +94,20 @@ make menuconfig
 在menuconfig界面中, Download Configuration -> download port, 填入开发板在你的系统中对应的USB端口, 例如`ttyUSB0`, 注意这里只需要填纯端口名, 不需要用完整的路径. 可以调高波特率加快下载, 只支持`115200`, `460800`, `921600`, `1000000`, `2000000`, Save后退出menuconfig
 
 执行烧录
+需要root权限,或者将当前用户加入群组
+```bash
+sudo usermod -aG dialout username
+```
+
+* Air103开发板,串口ch340的rst连接到了air103的rst,所以不需要手动reset,只需要将rule.mk中的rs参数修改为rts即可 *
+
+```
+-rs reset_action, set device reset method, default is manual control <none | at | rts>
+         none - manual control device reset
+         at   - use the at command to control the device reset
+         rts  - use the serial port rts pin to control the device reset
+```
+
 ```bash
 make flash
 ```
